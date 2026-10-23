@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Typhoon GO</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!--  WRAPPER — constrains to phone-sized viewport                -->
+  <!-- ============================================================ -->
+  <div id="app-wrapper">
+
+    <!-- ========================================================== -->
+    <!-- PAGE 1 — LOGIN                                             -->
+    <!-- ========================================================== -->
+    <div id="page-login" class="page active">
+
+      <!-- Red wave header -->
+      <header class="login-header">
+        <div class="login-logo">
+          <span class="logo-typhoon">TYPHOON</span>
+          <span class="logo-go">GO</span>
+        </div>
+        <div class="wave-container">
+          <svg viewBox="0 0 375 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,40 C60,80 120,0 190,40 C260,80 320,10 375,35 L375,0 L0,0 Z" fill="#FF2323"/>
+            <path d="M0,55 C70,100 140,15 210,55 C280,95 340,25 375,50 L375,0 L0,0 Z" fill="#FF4444" opacity="0.45"/>
+          </svg>
+        </div>
+      </header>
+
+      <!-- Login form body -->
+      <main class="login-body">
+        <h1 class="page-title">Login</h1>
+        <p class="page-subtitle">Sign in to continue.</p>
+
+        <div class="form-group">
+          <label class="field-label" for="login-email">EMAIL</label>
+          <input class="field-input" id="login-email" type="email" placeholder="******" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="login-password">PASSWORD</label>
+          <input class="field-input" id="login-password" type="password" placeholder="******" />
+        </div>
+
+        <button id="btn-login" class="btn-primary">Log in</button>
+
+        <a id="link-forgot" class="text-link" href="#">Forgot Password?</a>
+
+        <button id="btn-create-account" class="btn-outline">Create New Account</button>
+      </main>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE 1B — FORGOT PASSWORD                                  -->
+    <!-- ========================================================== -->
+    <div id="page-forgot" class="page">
+      <header class="inner-header">
+        <button class="btn-back" data-target="page-login">&#8592;</button>
+        <div class="header-logo">
+          <span class="logo-typhoon-sm">TYPHOON</span>
+          <span class="logo-go-sm">GO</span>
+        </div>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="inner-body">
+        <h1 class="page-title">Forgot Password</h1>
+        <p class="page-subtitle">Enter your email to reset your password.</p>
+
+        <div class="form-group">
+          <label class="field-label" for="forgot-email">EMAIL</label>
+          <input class="field-input" id="forgot-email" type="email" placeholder="Enter your email" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="forgot-new-pass">NEW PASSWORD</label>
+          <input class="field-input" id="forgot-new-pass" type="password" placeholder="New password" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="forgot-confirm-pass">CONFIRM PASSWORD</label>
+          <input class="field-input" id="forgot-confirm-pass" type="password" placeholder="Confirm password" />
+        </div>
+
+        <button id="btn-reset-password" class="btn-primary">Reset Password</button>
+        <a id="link-back-login-forgot" class="text-link" href="#">Back to Login</a>
+      </main>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE 2 — REGISTRATION                                      -->
+    <!-- ========================================================== -->
+    <div id="page-register" class="page">
+      <header class="inner-header">
+        <button class="btn-back" data-target="page-login">&#8592;</button>
+        <div class="header-logo">
+          <span class="logo-typhoon-sm">TYPHOON</span>
+          <span class="logo-go-sm">GO</span>
+        </div>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="inner-body">
+        <h1 class="page-title">Sign Up</h1>
+        <a id="link-already-signed" class="text-link underline" href="#">Already Signed up? Log in here.</a>
+
+        <div class="form-group">
+          <label class="field-label" for="reg-email">EMAIL</label>
+          <input class="field-input" id="reg-email" type="email" placeholder="" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="reg-password">PASSWORD</label>
+          <input class="field-input" id="reg-password" type="password" placeholder="" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="reg-firstname">FIRST NAME</label>
+          <input class="field-input" id="reg-firstname" type="text" placeholder="" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="reg-lastname">LAST NAME</label>
+          <input class="field-input" id="reg-lastname" type="text" placeholder="" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="reg-phone">PHONE NUMBER</label>
+          <input class="field-input" id="reg-phone" type="tel" placeholder="" />
+        </div>
+
+        <div class="form-group">
+          <label class="field-label" for="reg-address">ADDRESS</label>
+          <input class="field-input" id="reg-address" type="text" placeholder="" />
+        </div>
+
+        <button id="btn-register-submit" class="btn-primary">Submit</button>
+      </main>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE 3 — DASHBOARD                                         -->
+    <!-- ========================================================== -->
+    <div id="page-dashboard" class="page has-navbar">
+      <header class="dash-header">
+        <div class="header-spacer"></div>
+        <div class="header-logo">
+          <span class="logo-typhoon-sm">TYPHOON</span>
+          <span class="logo-go-sm">GO</span>
+        </div>
+        <button class="header-action-btn" data-target="page-recent-messages">
+          <i class="fas fa-comment-dots"></i>
+        </button>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="dash-body">
+        <!--Weather Banner -->
+        <img src="weatherbanner.png" class="weather-banner" alt="Weather Banner" />
+        <!-- 1. SOS Action Area -->
+        <button id="btn-tap-sos" class="sos-circle-outer">
+          <div class="sos-circle-inner">
+            <i class="fas fa-hand-paper tap-icon"></i>
+          </div>
+        </button>
+
+        <!-- SOS Button Label -->
+        <div class="sos-button-label">HOLD TO SEND SOS</div>
+
+        <!-- 2. Featured Carousel -->
+        <div class="featured-carousel-wrap">
+          <div class="featured-carousel" id="featured-carousel">
+
+            <!-- Slide 1: Typhoon Safety Tips -->
+            <button class="carousel-slide carousel-slide-btn" id="carousel-slide-0" data-target="page-survival-tips">
+              <img src="typhoontips.png" alt="Typhoon Safety Guide" class="carousel-img" />
+              <i class="fas fa-chevron-right carousel-arrow"></i>
+            </button>
+
+            <!-- Slide 2: First Aid -->
+            <button class="carousel-slide carousel-slide-btn" id="carousel-slide-1" data-target="page-first-aid">
+              <img src="firstaid&amp;safetytips.png" alt="First Aid Guide" class="carousel-img" />
+              <i class="fas fa-chevron-right carousel-arrow"></i>
+            </button>
+
+          </div>
+
+          <!-- Carousel Dots -->
+          <div class="carousel-dots">
+            <span class="carousel-dot active" data-index="0"></span>
+            <span class="carousel-dot" data-index="1"></span>
+          </div>
+        </div>
+
+        <!-- 3. Resource Grid (2x2) -->
+        <div class="resource-grid">
+          <button class="resource-tile" id="btn-gobag" data-target="page-go-bag-checklist">
+            <div class="resource-tile-img-wrap" id="gobag-img">
+              <img src="gobagchecklist.png" alt="Go-Bag Checklist" class="resource-tile-img" />
+            </div>
+            <h2 class="resource-tile-title">Go-Bag Checklist</h2>
+            <p class="resource-tile-description">Be ready before it hits!</p>
+            <p class="resource-tile-subtitle">Track and pack your essential survival items to stay one step ahead of the storm.</p>
+          </button>
+
+          <button class="resource-tile" id="btn-emergency-updates">
+            <div class="resource-tile-img-wrap" id="emergency-updates-img">
+              <img src="emergencyupdate.png" alt="Emergency Updates" class="resource-tile-img" />
+            </div>
+            <h2 class="resource-tile-title">Emergency Updates</h2>
+            <p class="resource-tile-description">Stay informed, stay safe!</p>
+            <p class="resource-tile-subtitle">Get real-time, critical weather alerts and official updates directly from local authorities.</p>
+          </button>
+
+          <button class="resource-tile" id="btn-safe-routes">
+            <div class="resource-tile-img-wrap" id="safe-routes-img">
+              <img src="saferoutes.png" alt="Safe Routes" class="resource-tile-img" />
+            </div>
+            <h2 class="resource-tile-title">Safe Routes</h2>
+            <p class="resource-tile-description">Navigate clear of hazards!</p>
+            <p class="resource-tile-subtitle">Find flood-free streets and secure paths to safety using our local hazard map.</p>
+          </button>
+
+          <button class="resource-tile" id="btn-evac-centers">
+            <div class="resource-tile-img-wrap" id="evac-centers-img">
+              <img src="evacuationcenter.png" alt="Evacuation Centers" class="resource-tile-img" />
+            </div>
+            <h2 class="resource-tile-title">Evacuation Centers</h2>
+            <p class="resource-tile-description">Find safe shelter fast!</p>
+            <p class="resource-tile-subtitle">Locate the nearest open evacuation facilities and instantly check their available capacity.</p>
+          </button>
+        </div>
+      </main>
+
+      <!-- Global Navbar -->
+      <nav class="global-navbar">
+        <button class="nav-btn nav-active" data-target="page-dashboard">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" data-target="page-safe-routes">
+          <i class="fas fa-map-marked-alt nav-icon"></i>
+          <span class="nav-label">Map</span>
+        </button>
+        <button class="nav-btn" data-target="page-contacts">
+          <i class="fas fa-phone nav-icon"></i>
+          <span class="nav-label">Call</span>
+        </button>
+        <button class="nav-btn" data-target="page-account">
+          <i class="fas fa-user-circle nav-icon"></i>
+          <span class="nav-label">Account</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- GO BAG CHECKLIST-->
+    <!-- ========================================================== -->
+
+    <div id="page-go-bag-checklist" class="page has-navbar">
+       <header class="inner-header">
+        <button class="btn-back" data-target="page-dashboard">&#8592;</button>
+        <div class="header-logo-mixed">
+          <span class="logo-typhoon-sm">Go-Bag</span>
+          <span class="logo-go-sm">Checklist</span>
+        </div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <!-- Milestone Reward Overlay -->
+      <div class="gobag-milestone-overlay" id="gobag-milestone-overlay">
+        <div class="gobag-milestone-card">
+          <div class="gobag-milestone-icon" id="gobag-milestone-icon">🎉</div>
+          <div class="gobag-milestone-title" id="gobag-milestone-title">Milestone Reached!</div>
+          <div class="gobag-milestone-msg" id="gobag-milestone-msg">Keep packing!</div>
+          <button class="gobag-milestone-btn" id="gobag-milestone-btn">Continue</button>
+        </div>
+      </div>
+
+      <main class="inner-body">  
+        <img src="gobagchecklistbanner.png" alt="Go-Bag Checklist" class="checklist-image" />
+        <div class="progress-section">
+          <div class="progress-header">
+            <div class="progress-title">
+              <h3>Typhoon Go Bag</h3>
+              <p>Essentials for one person</p>
+            </div>
+            <span class="badge-person">1 person</span>
+          </div>
+          <!-- Status label -->
+          <div class="gobag-status-label" id="gobag-status-label">
+            <span class="gobag-status-dot" id="gobag-status-dot"></span>
+            <span id="gobag-status-text">Not Started</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="gobag-progress-fill" style="width: 0%;"></div>
+          </div>
+          <div class="gobag-progress-meta">
+            <span class="gobag-items-count" id="gobag-items-count">0 / 15 items packed</span>
+            <span class="progress-percentage" id="gobag-percent">0%</span>
+          </div>
+        </div>
+
+  <section class="checklist-group">
+    <h4 class="group-title">WATER & FOOD</h4>
+    
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Drinking water (1.5L-2L)</strong>
+        <span>stored in a durable, reusable bottle</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Non-perishable food (canned goods, instant rice)</strong>
+        <span>3-day supply</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Manual Can Opener</strong>
+        <span>Small, folding type to save space</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Compact Mess Kit</strong>
+        <span>1 spoon, 1 fork, and a collapsible cup</span>
+      </div>
+    </label>
+    
+    </section>
+
+  <section class="checklist-group">
+    <h4 class="group-title">FIRST AID & MEDICINE</h4>
+    
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>First Aid Kit</strong>
+        <span>Bandages, antiseptic, gauze, and scissors</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Prescription Medications</strong>
+        <span>At least a 7-day supply</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Over-the-Counter Medications</strong>
+        <span>Paracetamol, Ibuprofen, and Diarrhea medication</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Alcohol & Sanitizer</strong>
+        <span>For cleaning hands and small wounds</span>
+      </div>
+    </label>
+  </section>
+
+  <section class="checklist-group">
+    <h4 class="group-title">TOOLS & EMERGENCY SUPPLIES</h4>
+    
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Flashlight</strong>
+        <span>Waterproof preferred, with extra set of batteries</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Whistle</strong>
+        <span>To signal for help in case of emergency</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Power Bank</strong>
+        <span>Fully charged, with cables for all household phones</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Rain Gear</strong>
+        <span>A lightweight, foldable poncho or compact umbrella</span>
+      </div>
+    </label>
+  </section>
+
+  <section class="checklist-group">
+    <h4 class="group-title">ESSENTIALS & IDENTITY</h4>
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Waterproof Pouch</strong>
+        <span>Containing copies of your ID and important documents</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Emergency Cash</strong>
+        <span>Small bills and coins</span>
+      </div>
+    </label>
+
+    <label class="check-item">
+      <input type="checkbox" class="gobag-checkbox">
+      <div class="item-text">
+        <strong>Extra Clothing</strong>
+        <span>1 set of dry clothes and socks, vacuum sealed to save space</span>
+      </div>
+    </label>
+  </section>  
+      </main>
+
+      <nav class="global-navbar">
+        <button class="nav-btn nav-active" data-target="page-dashboard">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" data-target="page-safe-routes">
+          <i class="fas fa-map-marked-alt nav-icon"></i>
+          <span class="nav-label">Map</span>
+        </button>
+        <button class="nav-btn" data-target="page-contacts">
+          <i class="fas fa-phone nav-icon"></i>
+          <span class="nav-label">Call</span>
+        </button>
+        <button class="nav-btn" data-target="page-account">
+          <i class="fas fa-user-circle nav-icon"></i>
+          <span class="nav-label">Account</span>
+        </button>
+      </nav>
+    </div>
+
+    <!--RECENT MESSAGES PAGE!-->
+
+    <div id="page-recent-messages" class="page has-navbar">
+  <header class="msg-header">
+  <button class="btn-back" data-target="page-dashboard">
+    <i class="fas fa-arrow-left"></i>
+  </button>
+  
+  <h1 class="msg-header-title">Messages</h1>
+  
+  <div class="header-spacer"></div>
+</header>
+
+  <main class="recent-msg-list">
+    <div class="recent-msg-item">
+      <div class="recent-msg-avatar" style="background: var(--red);">D</div>
+      <div class="recent-msg-info">
+        <div class="recent-msg-top">
+          <span class="recent-msg-name">PNRC</span>
+          <span class="recent-msg-time">10:42 AM</span>
+        </div>
+        <span class="recent-msg-preview">Help is on the Way</span>
+      </div>
+    </div>
+
+    <div class="recent-msg-item">
+      <div class="recent-msg-avatar" style="background: var(--dark-gray);">M</div>
+      <div class="recent-msg-info">
+        <div class="recent-msg-top">
+          <span class="recent-msg-name">NDRRMC</span>
+          <span class="recent-msg-time">Yesterday</span>
+        </div>
+        <span class="recent-msg-preview">Where are you right now?</span>
+      </div>
+    </div>
+
+    <div class="recent-msg-item">
+      <div class="recent-msg-avatar" style="background: var(--orange);">R</div>
+      <div class="recent-msg-info">
+        <div class="recent-msg-top">
+          <span class="recent-msg-name">Rescue Team Alpha</span>
+          <span class="recent-msg-time">Tue</span>
+        </div>
+        <span class="recent-msg-preview">Please standby, navigating floodwaters.</span>
+      </div>
+    </div>
+  </main>
+</div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE 7 — EVACUATION CENTERS                               -->
+    <!-- ========================================================== -->
+    <div id="page-evac-centers" class="page has-navbar">
+      <header class="inner-header">
+        <button class="btn-back" data-target="page-dashboard">&#8592;</button>
+        <div class="header-logo-mixed">
+          <span class="logo-typhoon-sm">Evacuation</span>
+          <span class="logo-go-sm">Centers</span>
+        </div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="inner-body">
+        <div class="search-bar-wrap">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" id="evac-search" type="text" placeholder="Search" />
+        </div>
+
+        <!-- Evacuation Center Cards -->
+        <div class="evac-card open" id="evac-card-1">
+          <div class="evac-card-top">
+            <h3 class="evac-name">MSU-IIT Gymnasium</h3>
+            <p class="evac-desc">Evacuation Center</p>
+          </div>
+          <div class="evac-card-bottom">
+            <div class="evac-status open-status">
+              <span class="status-dot green"></span>
+              <span class="status-text">Open</span>
+            </div>
+            <span class="evac-capacity">Capacity: 100+</span>
+          </div>
+        </div>
+
+        <div class="evac-card partial" id="evac-card-2">
+          <div class="evac-card-top">
+            <h3 class="evac-name">Barangay Hall</h3>
+            <p class="evac-desc">Purok Adelfa</p>
+          </div>
+          <div class="evac-card-bottom">
+            <div class="evac-status partial-status">
+              <span class="status-dot orange"></span>
+              <span class="status-text">80% Full</span>
+            </div>
+            <span class="evac-capacity">Capacity: 50</span>
+          </div>
+        </div>
+
+        <div class="evac-card full" id="evac-card-3">
+          <div class="evac-card-top">
+            <h3 class="evac-name">Kabacsanan Gym</h3>
+            <p class="evac-desc">Zone 1</p>
+          </div>
+          <div class="evac-card-bottom">
+            <div class="evac-status full-status">
+              <span class="status-dot red"></span>
+              <span class="status-text">Full</span>
+            </div>
+            <span class="evac-capacity">Capacity: 200</span>
+          </div>
+        </div>
+
+        <div class="evac-card partial" id="evac-card-2">
+          <div class="evac-card-top">
+            <h3 class="evac-name">Barangay Hall</h3>
+            <p class="evac-desc">Palao Gym</p>
+          </div>
+          <div class="evac-card-bottom">
+            <div class="evac-status partial-status">
+              <span class="status-dot orange"></span>
+              <span class="status-text">70% Full</span>
+            </div>
+            <span class="evac-capacity">Capacity: 200</span>
+          </div>
+        </div>
+
+        <div class="evac-card partial" id="evac-card-2">
+          <div class="evac-card-top">
+            <h3 class="evac-name">Iligan City National High School</h3>
+            <p class="evac-desc">Barangay Mahayahay</p>
+          </div>
+          <div class="evac-card-bottom">
+            <div class="evac-status partial-status">
+              <span class="status-dot orange"></span>
+              <span class="status-text">30% Full</span>
+            </div>
+            <span class="evac-capacity">Capacity: 1000</span>
+          </div>
+        </div>
+      </main>
+
+      <nav class="global-navbar">
+        <button class="nav-btn nav-active" data-target="page-dashboard">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" data-target="page-safe-routes">
+          <i class="fas fa-map-marked-alt nav-icon"></i>
+          <span class="nav-label">Map</span>
+        </button>
+        <button class="nav-btn" data-target="page-contacts">
+          <i class="fas fa-phone nav-icon"></i>
+          <span class="nav-label">Call</span>
+        </button>
+        <button class="nav-btn" data-target="page-account">
+          <i class="fas fa-user-circle nav-icon"></i>
+          <span class="nav-label">Account</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE — CONTACTS                                            -->
+    <!-- ========================================================== -->
+    <div id="page-contacts" class="page has-navbar">
+      <header class="inner-header">
+        <button class="btn-back" data-target="page-dashboard"><i class="fas fa-arrow-left"></i></button>
+        <div class="header-logo"><span class="logo-typhoon-sm">Emergency</span><span class="logo-go-sm">Contacts</span></div>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="inner-body contacts-body">
+        <!-- Search Bar -->
+        <div class="search-bar-wrap">
+          <i class="fas fa-search search-icon"></i>
+          <input class="search-input" id="contacts-search" type="text" placeholder="Search emergency contacts..." />
+        </div>
+
+        <!-- Recent Calls Carousel -->
+        <p class="contacts-section-label">Recent Calls</p>
+        <div class="recent-calls-carousel" id="recent-calls-carousel">
+          <div class="recent-call-card" data-contact="PNRC" data-target="page-message">
+            <div class="recent-call-avatar" style="background: #e74c3c;">P</div>
+            <span class="recent-call-name">PNRC</span>
+            <span class="recent-call-time">2m ago</span>
+          </div>
+          <div class="recent-call-card" data-contact="CDRRMO" data-target="page-message">
+            <div class="recent-call-avatar" style="background: #2980b9;">C</div>
+            <span class="recent-call-name">CDRRMO</span>
+            <span class="recent-call-time">1h ago</span>
+          </div>
+          <div class="recent-call-card" data-contact="NDRRMC" data-target="page-message">
+            <div class="recent-call-avatar" style="background: #8e44ad;">N</div>
+            <span class="recent-call-name">NDRRMC</span>
+            <span class="recent-call-time">3h ago</span>
+          </div>
+          <div class="recent-call-card" data-contact="PCG" data-target="page-message">
+            <div class="recent-call-avatar" style="background: #e67e22;">P</div>
+            <span class="recent-call-name">PCG</span>
+            <span class="recent-call-time">5h ago</span>
+          </div>
+        </div>
+
+        <div class="separate-line"></div>
+        <!-- Alphabetical Contact List -->
+        <div class="contact-list" id="contact-list">
+          <div class="contact-alpha-divider">P</div>
+          <div class="contact-row" data-contact="BFP Iligan" data-target="page-message">
+            <div class="contact-avatar" style="background:#e67e22;">P</div>
+            <div class="contact-info">
+              <span class="contact-name">Philippine National Red Cross</span>
+              <span class="contact-rel">143| 8627-0000</span>
+            </div>
+            <div class="contact-actions">
+              <button class="contact-action-btn contact-call"><i class="fas fa-phone"></i></button>
+              <button class="contact-action-btn contact-sms" data-contact="BFP Iligan" data-target="page-message"><i class="fas fa-comment"></i></button>
+            </div>
+          </div>
+
+          <div class="contact-alpha-divider">C</div>
+          <div class="contact-row" data-contact="CDRRMO" data-target="page-message">
+            <div class="contact-avatar" style="background:#2980b9;">C</div>
+            <div class="contact-info">
+              <span class="contact-name">CDRRMO</span>
+              <span class="contact-rel">0997 726 2692</span>
+            </div>
+            <div class="contact-actions">
+              <button class="contact-action-btn contact-call"><i class="fas fa-phone"></i></button>
+              <button class="contact-action-btn contact-sms" data-contact="CDRRMO" data-target="page-message"><i class="fas fa-comment"></i></button>
+            </div>
+          </div>
+
+          <div class="contact-alpha-divider">N</div>
+          <div class="contact-row" data-contact="Dad" data-target="page-message">
+            <div class="contact-avatar" style="background:#e74c3c;">N</div>
+            <div class="contact-info">
+              <span class="contact-name">NDRRMC</span>
+              <span class="contact-rel">8911-1406</span>
+            </div>
+            <div class="contact-actions">
+              <button class="contact-action-btn contact-call"><i class="fas fa-phone"></i></button>
+              <button class="contact-action-btn contact-sms" data-contact="Dad" data-target="page-message"><i class="fas fa-comment"></i></button>
+            </div>
+          </div>
+
+          <div class="contact-alpha-divider">P</div>
+          <div class="contact-row" data-contact="Mom" data-target="page-message">
+            <div class="contact-avatar" style="background:#8e44ad;">P</div>
+            <div class="contact-info">
+              <span class="contact-name">Philippine Coast Guard</span>
+              <span class="contact-rel">0917-724-3682</span>
+            </div>
+            <div class="contact-actions">
+              <button class="contact-action-btn contact-call"><i class="fas fa-phone"></i></button>
+              <button class="contact-action-btn contact-sms" data-contact="Mom" data-target="page-message"><i class="fas fa-comment"></i></button>
+            </div>
+          </div>
+
+          <div class="contact-alpha-divider">P</div>
+          <div class="contact-row" data-contact="PNP Iligan" data-target="page-message">
+            <div class="contact-avatar" style="background:#27ae60;">P</div>
+            <div class="contact-info">
+              <span class="contact-name">PNP Iligan</span>
+              <span class="contact-rel">(02) 722-0650</span>
+            </div>
+            <div class="contact-actions">
+              <button class="contact-action-btn contact-call"><i class="fas fa-phone"></i></button>
+              <button class="contact-action-btn contact-sms" data-contact="PNP Iligan" data-target="page-message"><i class="fas fa-comment"></i></button>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Add Contact Button -->
+      <button class="btn-add-contact" id="btn-add-contact" title="Add Contact">
+        <i class="fas fa-plus"></i>
+      </button>
+
+      <!-- Add Contact Modal -->
+      <div class="modal-overlay" id="add-contact-modal-overlay">
+        <div class="modal-container">
+          <button class="modal-close-btn" id="btn-close-add-contact" type="button">&times;</button>
+          <h2 class="modal-title">Add Contact</h2>
+
+          <form class="add-contact-form" id="add-contact-form">
+            <div class="form-group">
+              <label class="field-label" for="new-contact-name">NAME</label>
+              <input
+                class="field-input"
+                id="new-contact-name"
+                type="text"
+                placeholder="e.g., John Smith"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="field-label" for="new-contact-phone">PHONE NUMBER</label>
+              <div class="form-group"> 
+                <input 
+                class="field-input" 
+                id="reg-phone" 
+                type="tel" 
+                placeholder="e.g., 0917 123 4567"
+                required />
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary btn-save-contact">Save Contact</button>
+          </form>
+        </div>
+      </div>
+
+      <nav class="global-navbar">
+        <button class="nav-btn nav-active" data-target="page-dashboard">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" data-target="page-safe-routes">
+          <i class="fas fa-map-marked-alt nav-icon"></i>
+          <span class="nav-label">Map</span>
+        </button>
+        <button class="nav-btn" data-target="page-contacts">
+          <i class="fas fa-phone nav-icon"></i>
+          <span class="nav-label">Call</span>
+        </button>
+        <button class="nav-btn" data-target="page-account">
+          <i class="fas fa-user-circle nav-icon"></i>
+          <span class="nav-label">Account</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE — ACCOUNT                                             -->
+    <!-- ========================================================== -->
+    <div id="page-account" class="page has-navbar">
+      <header class="inner-header">
+        <button class="btn-back" data-target="page-dashboard"><i class="fas fa-arrow-left"></i></button>
+        <div class="header-logo"><span class="logo-typhoon-sm">TYPHOON</span><span class="logo-go-sm">GO</span></div>
+        <div class="header-spacer"></div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="account-body">
+        <!-- Profile Header -->
+        <div class="account-profile-header">
+          <!-- ASSET PLACEHOLDER: Replace src with the user's profile photo -->
+          <div class="account-avatar-wrap">
+            <img src="userprofile.png" alt="Profile Photo" class="account-profile-img" id="account-profile-img" />
+            
+            <button class="account-edit-avatar-btn"><i class="fas fa-pencil-alt"></i></button>
+          </div>
+          <p class="account-welcome">Welcome back,</p>
+          <h2 class="account-name">Trisha Nicole Q. Jacuba</h2>
+          <p class="account-email">trishanicolejacuba@gmail.com</p>
+        </div>
+
+        <div class="inner-divider"></div>
+
+        <!-- Menu List -->
+        <div class="account-menu">
+          <div class="account-menu-item">
+            <i class="fas fa-user-circle account-menu-icon"></i>
+            <span>User Profile</span>
+            <i class="fas fa-chevron-right account-menu-chevron"></i>
+          </div>
+          <div class="account-menu-item">
+            <i class="fas fa-key account-menu-icon"></i>
+            <span>Change Password</span>
+            <i class="fas fa-chevron-right account-menu-chevron"></i>
+          </div>
+          <div class="account-menu-item">
+            <i class="fas fa-cog account-menu-icon"></i>
+            <span>Settings and Preferences</span>
+            <i class="fas fa-chevron-right account-menu-chevron"></i>
+          </div>
+          <div class="account-menu-item">
+            <i class="fas fa-question-circle account-menu-icon"></i>
+            <span>Help and FAQ</span>
+            <i class="fas fa-chevron-right account-menu-chevron"></i>
+          </div>
+          <div class="account-menu-item">
+            <i class="fas fa-file-contract account-menu-icon"></i>
+            <span>Privacy Policy and Terms</span>
+            <i class="fas fa-chevron-right account-menu-chevron"></i>
+          </div>
+          <div class="account-menu-item">
+            <i class="fas fa-info-circle account-menu-icon"></i>
+            <span>About Typhoon Go</span>
+            <i class="fas fa-chevron-right account-menu-chevron"></i>
+          </div>
+        </div>
+
+        <div class="account-logout-wrap">
+          <button class="btn-logout" id="btn-logout">
+            <i class="fas fa-sign-out-alt"></i> Log Out
+          </button>
+        </div>
+      </main>
+
+      <nav class="global-navbar">
+        <button class="nav-btn nav-active" data-target="page-dashboard">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" data-target="page-safe-routes">
+          <i class="fas fa-map-marked-alt nav-icon"></i>
+          <span class="nav-label">Map</span>
+        </button>
+        <button class="nav-btn" data-target="page-contacts">
+          <i class="fas fa-phone nav-icon"></i>
+          <span class="nav-label">Call</span>
+        </button>
+        <button class="nav-btn" data-target="page-account">
+          <i class="fas fa-user-circle nav-icon"></i>
+          <span class="nav-label">Account</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE 8/9 — SAFE ROUTES                                    -->
+    <!-- ========================================================== -->
+    <div id="page-safe-routes" class="page has-navbar">
+      <header class="inner-header">
+        <button class="btn-back" data-target="page-dashboard">&#8592;</button>
+        <div class="header-logo-mixed">
+          <span class="logo-typhoon-sm">Safest</span>
+          <span class="logo-go-sm">Route</span>
+        </div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="safe-routes-body">
+        <!-- Leaflet Map Container -->
+        <div class="map-placeholder" id="map-container"></div>
+
+        <!-- Route Legend -->
+        <div class="route-cards-wrap">
+          <div class="route-card safe-route" id="route1-card">
+            <div class="route-card-left">
+              <div class="route-icon safe-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="10" fill="#2ECC40"/><path d="M8 12 L11 15 L16 9" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="route-name">Route 1</span>
+            </div>
+            <span class="route-status safe-label">✓ Safe</span>
+          </div>
+
+          <div class="route-card flooded-route" id="route2-card">
+            <div class="route-card-left">
+              <div class="route-icon flooded-icon">
+                <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="10" fill="#FF2323"/><path d="M8 8 L16 16 M16 8 L8 16" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+              </div>
+              <span class="route-name">Route 2</span>
+            </div>
+            <span class="route-status flooded-label">✕ Flooded</span>
+          </div>
+
+          <!-- Destination dropdown (Page 8 state: collapsed, Page 9: expanded) -->
+          <div class="destination-card" id="destination-card">
+            <div class="destination-header" id="destination-toggle">
+              <div class="dest-pin-wrap">
+                <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#FF2323"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg>
+              </div>
+              <div class="dest-text">
+                <p class="dest-name">MSU-IIT Gymnasium</p>
+                <p class="dest-address">Tibanga, Iligan City, Lanao Del Norte, Nort....</p>
+              </div>
+              <span class="dest-chevron" id="dest-chevron">▼</span>
+            </div>
+
+            <!-- Expanded dropdown (hidden by default) -->
+            <div class="destination-dropdown" id="destination-dropdown" style="display:none;">
+              <div class="dest-option">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#FF2323"/></svg>
+                <span>Baranggay Hall Purok Adelfa</span>
+              </div>
+              <div class="dest-option">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#FF2323"/></svg>
+                <span>Kabaksanan Gymnasium</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Travel info (shown after destination selected) -->
+          <div class="travel-info-card" id="travel-info-card" style="display:none;">
+            <div class="travel-option">
+              <div class="travel-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#666" stroke-width="2">
+                  <path d="M13 4a2 2 0 0 1 0 4H5a2 2 0 0 1 0-4h8zm-4 8c0 2.21-1.79 4-4 4S1 14.21 1 12s1.79-4 4-4 4 1.79 4 4zm10 0c0 2.21-1.79 4-4 4s-4-1.79-4-4 1.79-4 4-4 4 1.79 4 4z"/>
+                  <circle cx="5" cy="12" r="1.5" fill="#666"/>
+                  <circle cx="19" cy="12" r="1.5" fill="#666"/>
+                  <path d="M5 8V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="travel-details">
+                <p class="travel-mode">Walk · 1.5km</p>
+                <p class="travel-sub">10 mins · MSU-IIT Gymnasim</p>
+              </div>
+            </div>
+            <div class="travel-option">
+              <div class="travel-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#666" stroke-width="2">
+                  <rect x="2" y="8" width="20" height="10" rx="2"/>
+                  <path d="M6 18v2M18 18v2M2 12h20M6 8V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/>
+                  <circle cx="7" cy="17" r="1" fill="#666"/>
+                  <circle cx="17" cy="17" r="1" fill="#666"/>
+                </svg>
+              </div>
+              <div class="travel-details">
+                <p class="travel-mode">Vehicle · 1.5km</p>
+                <p class="travel-sub">5 mins · MSU-IIT Gymnasim</p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end route-cards-wrap -->
+      </main>
+
+      <nav class="global-navbar">
+        <button class="nav-btn nav-active" data-target="page-dashboard">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn nav-active" data-target="page-safe-routes">
+          <i class="fas fa-map-marked-alt nav-icon"></i>
+          <span class="nav-label">Map</span>
+        </button>
+        <button class="nav-btn" data-target="page-contacts">
+          <i class="fas fa-phone nav-icon"></i>
+          <span class="nav-label">Call</span>
+        </button>
+        <button class="nav-btn" data-target="page-account">
+          <i class="fas fa-user-circle nav-icon"></i>
+          <span class="nav-label">Account</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE 8 — TYPHOON SURVIVAL TIPS                             -->
+    <!-- ========================================================== -->
+    <div id="page-survival-tips" class="page has-navbar">
+      <header class="inner-header">
+        <button class="btn-back" data-target="page-dashboard">&#8592;</button>
+        <div class="header-logo-mixed">
+          <span class="logo-typhoon-sm">Typhoon</span>
+          <span class="logo-go-sm">Safety Tips</span>
+        </div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="inner-body">
+        <!--Typhoon Safety Tips Banner-->
+        <img src="typhoonsafetytipsbanner.png" alt="Typhoon Safety Tips" class="tips-banner-image">
+        <!-- Typhoon Safety Tips Content -->
+        <div class="typhoon-tips-content">
+          <h1 class="tips-title">Typhoon Safety Tips</h1>
+          <p class="tips-description">When a storm is on the horizon, proactive preparation is the single most effective way to protect your home and family. This guide outlines critical safety protocols to follow before, during, and after a typhoon to help you minimize risks and stay out of harm's way.</p>
+          
+          <div class="tips-section">
+            <h2 class="tips-section-title">Before the Typhoon</h2>
+            <ul class="tips-list">
+              <li>Prepare a 3-day emergency kit (water, food, and medicine)</li>
+              <li>Secure loose objects around the house (e.g., roof tiles, pots)</li>
+              <li>Know your local evacuation center</li>
+              <li>Trim branches and clear gutters</li>
+              <li>Charge all electronic devices and power banks</li>
+              <li>Keep important documents in a waterproof bag</li>
+            </ul>
+          </div>
+          <div class="separate-line"></div>
+          
+          <div class="tips-section">
+            <h2 class="tips-section-title">During the Typhoon</h2>
+            <ul class="tips-list">
+              <li>Stay indoors, move to a safe interior room away from windows</li>
+              <li>Keep a battery-powered radio for updates</li>
+              <li>Turn off the main power if water rises and enters your home</li>
+              <li>Do not go outside no matter how calm it seems</li>
+              <li>Keep children and pets in a designated safe area</li>
+              <li>Listen to emergency broadcasts for safety instructions</li>
+            </ul>
+          </div>
+          <div class="separate-line"></div>
+          
+          <div class="tips-section">
+            <h2 class="tips-section-title">After the Typhoon</h2>
+            <ul class="tips-list">
+              <li>Inspect your house for structural damage before entering</li>
+              <li>Beware of fallen power lines and floodwaters</li>
+              <li>Report damages to local authorities immediately</li>
+              <li>Use flashlights instead of candles to avoid fire hazards</li>
+              <li>Check on neighbors and community members</li>
+              <li>Dispose of spoiled food and contaminated water</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <!-- Global Navbar -->
+      <nav class="global-navbar">
+        <button class="nav-btn" data-target="page-dashboard">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" data-target="page-safe-routes">
+          <i class="fas fa-map-marked-alt nav-icon"></i>
+          <span class="nav-label">Map</span>
+        </button>
+        <button class="nav-btn" data-target="page-contacts">
+          <i class="fas fa-phone nav-icon"></i>
+          <span class="nav-label">Call</span>
+        </button>
+        <button class="nav-btn" data-target="page-account">
+          <i class="fas fa-user-circle nav-icon"></i>
+          <span class="nav-label">Account</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE 9 — FIRST AID & SURVIVAL GUIDE                        -->
+    <!-- ========================================================== -->
+    <div id="page-first-aid" class="page has-navbar">
+      <header class="inner-header">
+        <button class="btn-back" data-target="page-dashboard">&#8592;</button>
+        <div class="header-logo-mixed">
+          <span class="logo-typhoon-sm">First Aid &</span>
+          <span class="logo-go-sm">Survival</span>
+        </div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="inner-body">
+        <!-- First Aid & Survival Guide Banner -->
+        <img src="firstaidbanner.png" alt="First Aid & Survival Guide" class="first-aid-banner-image">
+        <div class="first-aid-content">
+          <h1 class="first-aid-title">First Aid & Survival Guide</h1>
+          <h3 class="first-aid-description">In the wake of an emergency, knowing how to respond to injuries and manage limited resources can be life-saving. These essential survival strategies and first aid techniques are designed to provide you with the practical skills needed to handle medical situations and maintain safety until professional help arrives.</h3>
+          
+          <div class="first-aid-section">
+            <h2 class="first-aid-section-title">Essential First Aid Kit (Waterproof)</h2>
+            <ul class="first-aid-list">
+              <li><strong>Wound Care:</strong> Antiseptic wipes, alcohol, cotton, gauze, bandages, adhesive plasters.</li>
+              <li><strong>Medicine:</strong> Pain relievers (paracetamol), anti-diarrheal medication, antibiotics, and personal prescription medications.</li>
+              <li><strong>Hygiene/Safety:</strong> Face masks, hand sanitizer, soap, mosquito repellent, and a whistle.</li>
+              <li><strong>Tools:</strong> Small flashlight (or headlamp), extra batteries, scissors, tweezers.</li>
+            </ul>
+          </div>
+          <div class="separate-line"></div>
+          
+          <div class="first-aid-section">
+            <h2 class="first-aid-section-title">Immediate First Aid Actions</h2>
+            <ul class="first-aid-list">
+              <li><strong>Stop Bleeding:</strong> Apply direct pressure to wounds using a sterile cloth or bandage.</li>
+              <li><strong>Treat Minor Cuts:</strong> Clean with antiseptic wipes or alcohol to prevent infection from dirty water.</li>
+              <li><strong>Manage Fractures:</strong> Keep the injured area still and elevated, and seek medical attention as soon as possible.</li>
+              <li><strong>Prevent Illness:</strong> Wash hands frequently with sanitizer and consume only clean water to avoid diarrhea and skin infections.</li>
+            </ul>
+          </div>
+          <div class="separate-line"></div>
+          
+          <div class="first-aid-section">
+            <h2 class="first-aid-section-title">CPR & Choking Response</h2>
+            <ul class="first-aid-list">
+              <li><strong>CPR (Cardiopulmonary Resuscitation):</strong> For unresponsive person with no pulse, perform chest compressions at 100-120 beats per minute.</li>
+              <li><strong>Choking Victim:</strong> Perform the Heimlich maneuver by placing a fist above the navel and delivering upward thrusts.</li>
+              <li><strong>Recovery Position:</strong> Place unconscious breathing victim on their side to maintain airway patency.</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <!-- Global Navbar -->
+      <nav class="global-navbar">
+        <button class="nav-btn" data-target="page-dashboard">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" data-target="page-safe-routes">
+          <i class="fas fa-map-marked-alt nav-icon"></i>
+          <span class="nav-label">Map</span>
+        </button>
+        <button class="nav-btn" data-target="page-contacts">
+          <i class="fas fa-phone nav-icon"></i>
+          <span class="nav-label">Call</span>
+        </button>
+        <button class="nav-btn" data-target="page-account">
+          <i class="fas fa-user-circle nav-icon"></i>
+          <span class="nav-label">Account</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE 10 — EMERGENCY UPDATES                               -->
+    <!-- ========================================================== -->
+    <div id="page-emergency-updates" class="page has-navbar">
+      <header class="inner-header">
+        <button class="btn-back" data-target="page-dashboard">&#8592;</button>
+        <div class="header-logo-mixed">
+          <span class="logo-typhoon-sm">Emergency</span>
+          <span class="logo-go-sm">Updates</span>
+        </div>
+      </header>
+      <div class="inner-divider"></div>
+
+      <main class="inner-body">
+        <div class="search-bar-wrap">
+          <span class="search-icon">🔍</span>
+          <input class="search-input" id="alert-search" type="text" placeholder="Search" />
+        </div>
+
+        <!-- Alert cards -->
+        <div class="alert-card" id="alert-1">
+          <div class="alert-card-header">
+            <div class="alert-title-wrap">
+              <span class="alert-dot"></span>
+              <span class="alert-title-text">Alert</span>
+            </div>
+            <span class="alert-time">1 min ago</span>
+          </div>
+          <p class="alert-body">(3:45 PM): Floodwater in Purok 3 now knee-deep. Residents advised to prepare for possible evacuation....</p>
+        </div>
+
+        <div class="alert-card" id="alert-2">
+          <div class="alert-card-header">
+            <div class="alert-title-wrap">
+              <span class="alert-dot"></span>
+              <span class="alert-title-text">Alert</span>
+            </div>
+            <span class="alert-time">24 mins ago</span>
+          </div>
+          <p class="alert-body">(4:10 PM): Water level rising near Riverside Area. Please move vehicles to higher ground....</p>
+        </div>
+
+        <div class="alert-card" id="alert-3">
+          <div class="alert-card-header">
+            <div class="alert-title-wrap">
+              <span class="alert-dot"></span>
+              <span class="alert-title-text">Alert</span>
+            </div>
+            <span class="alert-time">30 mins ago</span>
+          </div>
+          <p class="alert-body">Evacuation ongoing in Purok 5. Proceed to Barangay Covered Court immediately....</p>
+        </div>
+      </main>
+
+      <nav class="global-navbar">
+        <button class="nav-btn nav-active" data-target="page-dashboard">
+          <i class="fas fa-home nav-icon"></i>
+          <span class="nav-label">Home</span>
+        </button>
+        <button class="nav-btn" data-target="page-safe-routes">
+          <i class="fas fa-map-marked-alt nav-icon"></i>
+          <span class="nav-label">Map</span>
+        </button>
+        <button class="nav-btn" data-target="page-contacts">
+          <i class="fas fa-phone nav-icon"></i>
+          <span class="nav-label">Call</span>
+        </button>
+        <button class="nav-btn" data-target="page-account">
+          <i class="fas fa-user-circle nav-icon"></i>
+          <span class="nav-label">Account</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- PAGE — MESSAGE                                             -->
+    <!-- ========================================================== -->
+    <div id="page-message" class="page">
+
+      <header class="msg-header">
+        <button class="btn-back" data-target="page-contacts"><i class="fas fa-arrow-left"></i></button>
+        <div class="msg-header-contact">
+          <div class="msg-header-avatar" id="msg-header-avatar">P</div>
+          <span class="msg-header-name" id="msg-header-name">Philippine National Red Cross</span>
+        </div>
+        <div class="msg-header-actions">
+          <button class="msg-header-icon-btn"><i class="fas fa-phone"></i></button>
+          <button class="msg-header-icon-btn" id="msg-menu-toggle"><i class="fas fa-ellipsis-v"></i></button>
+        </div>
+        <!-- Dropdown Menu -->
+        <div class="msg-dropdown" id="msg-dropdown" style="display:none;">
+          <div class="msg-dropdown-item">Details</div>
+          <div class="msg-dropdown-item">Archive</div>
+          <div class="msg-dropdown-item">Delete Conversation</div>
+          <div class="msg-dropdown-item msg-dropdown-danger">Block and report spam</div>
+          <div class="msg-dropdown-item">Help and feedback</div>
+        </div>
+      </header>
+
+      <main class="msg-body" id="msg-body">
+        <!-- Empty State -->
+        <div class="msg-empty-state" id="msg-empty-state">
+          <div class="msg-empty-avatar" id="msg-empty-avatar">P</div>
+          <p class="msg-empty-text">Say hello to <span id="msg-empty-name">PNRC</span>!</p>
+        </div>
+        <!-- Quick Chat Buttons -->
+        <div class="msg-quick-chats" id="msg-quick-chats">
+          <button class="msg-quick-btn" data-msg="I am safe.">I am safe. ✅</button>
+          <button class="msg-quick-btn msg-quick-urgent" data-msg="Help needed here!">Help needed here! 🚨</button>
+          <button class="msg-quick-btn" data-msg="What's the status?">What's the status? 📡</button>
+          <button class="msg-quick-btn" data-msg="Sending my location...">Sending my location... 📍</button>
+        </div>
+        <!-- Chat messages will be injected here -->
+        <div class="msg-chat-list" id="msg-chat-list"></div>
+      </main>
+
+      <!-- Footer Input -->
+      <div class="msg-footer">
+        <div class="msg-footer-utils">
+          <button class="msg-util-btn"><i class="fas fa-paperclip"></i></button>
+          <button class="msg-util-btn"><i class="fas fa-camera"></i></button>
+          <button class="msg-util-btn"><i class="fas fa-images"></i></button>
+          <button class="msg-util-btn"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="msg-input-wrap">
+          <input class="msg-input" id="msg-input" type="text" placeholder="Type a message..." />
+          <button class="msg-emoji-btn"><i class="fas fa-smile"></i></button>
+        </div>
+        <button class="msg-send-btn" id="msg-send-btn"><i class="fas fa-paper-plane"></i></button>
+      </div>
+
+    </div>
+
+  </div><!-- end #app-wrapper -->
+
+  <script src="script.js"></script>
+</body>
+</html>

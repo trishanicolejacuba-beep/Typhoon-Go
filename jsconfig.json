@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "checkJs": false,
+    "target": "ES2020"
+  },
+  "include": ["*.js"],
+  "exclude": ["node_modules", "**/*.min.js"]
+}
