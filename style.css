@@ -1,0 +1,2355 @@
+/* ============================================================
+   TYPHOON GO — style.css
+   Faithfully recreated from the Canva mobile UI prototype
+   ============================================================ */
+
+/* ── Reset & Base ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --red:        #FF2323;
+  --red-light:  #FF5555;
+  --red-pale:   #FFD6D6;
+  --black:      #1A1A1A;
+  --dark-gray:  #4A4A4A;
+  --mid-gray:   #888888;
+  --light-gray: #D5D5D5;
+  --input-bg:   #D9D9D9;
+  --white:      #FFFFFF;
+  --green:      #2ECC40;
+  --orange:     #FF851B;
+  --navbar-bg:  #1C1C1C;
+  --card-border: #1A1A1A;
+  --background: #fffefe;
+
+  --font: 'Nunito', sans-serif;
+
+  --navbar-h: 70px;
+  --header-h: 56px;
+}
+
+html, body {
+  height: 100%;
+  background: #e8e8e8;
+  font-family: var(--font);
+  color: var(--black);
+  overflow: hidden;
+}
+
+/* ── App Wrapper — phone chrome ────────────────────────────── */
+#app-wrapper {
+  position: relative;
+  width: 390px;
+  max-width: 100vw;
+  height: 844px;
+  max-height: 100dvh;
+  margin: 0 auto;
+  background: var(--white);
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.22);
+
+  /* Center on desktop */
+  display: flex;
+  align-items: stretch;
+}
+
+@media (max-width: 430px) {
+  #app-wrapper {
+    width: 100vw;
+    height: 100dvh;
+    box-shadow: none;
+  }
+  html, body { background: var(--background); }
+}
+
+/* ── Page system ───────────────────────────────────────────── */
+.page {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  background: var(--background);
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Hide scrollbar */
+  scrollbar-width: none;
+}
+.page::-webkit-scrollbar { display: none; }
+
+.page.active { display: flex; }
+
+/* Pages with navbar need bottom padding */
+.page.has-navbar {
+  padding-bottom: var(--navbar-h);
+}
+
+/* Slide-in animation */
+.page.slide-in {
+  animation: slideIn 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+
+/* ============================================================
+   SHARED HEADER COMPONENTS
+   ============================================================ */
+
+/* Inner page header (white) */
+.inner-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-h);
+  padding: 0 16px;
+  background: var(--background);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.inner-header .btn-back {
+  position: absolute;
+  left: 16px;
+}
+
+.inner-header .avatar-circle {
+  position: absolute;
+  right: 16px;
+}
+
+.inner-header .header-spacer {
+  position: absolute;
+  right: 16px;
+}
+
+.inner-divider {
+  height: 1px;
+  background: #e0e0e0;
+  flex-shrink: 0;
+}
+
+/* Back button */
+.btn-back {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--black);
+  cursor: pointer;
+  padding: 6px 8px 6px 0;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Logo variants */
+.header-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.logo-typhoon-sm {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--black);
+  letter-spacing: -0.5px;
+}
+.logo-go-sm {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--red);
+}
+
+/* "SOS Rescue" variant header — red accent */
+.header-logo-red {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.header-logo-red .logo-typhoon-sm { color: var(--black); font-size: 17px; }
+.header-logo-red .logo-go-sm { color: var(--red); font-size: 17px; }
+
+/* "Evacuation Centers" etc — mixed */
+.header-logo-mixed {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+.header-logo-mixed .logo-typhoon-sm {
+  color: var(--black);
+  font-size: 16px;
+  font-weight: 900;
+}
+.header-logo-mixed .logo-go-sm {
+  color: var(--red);
+  font-size: 16px;
+  font-weight: 900;
+}
+
+/* Avatar circle */
+.avatar-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #9E9E9E;
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.header-spacer { width: 36px; }
+
+/* ============================================================
+   PAGE 1 — LOGIN
+   ============================================================ */
+
+#page-login {
+  flex-direction: column;
+}
+
+/* Red wave header */
+.login-header {
+  position: relative;
+  background: var(--red);
+  flex-shrink: 0;
+  padding-bottom: 0;
+}
+
+.login-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 52px 0 32px 0;
+  justify-content: center;
+}
+
+.logo-typhoon {
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--black);
+  letter-spacing: -1px;
+}
+
+.logo-go {
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+
+.wave-container {
+  width: 100%;
+  height: 80px;
+  background: var(--red);
+  margin-top: -1px;
+}
+
+.wave-container svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: var(--white);
+}
+
+/* Login form body */
+.login-body {
+  flex: 1;
+  padding: 24px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ============================================================
+   SHARED FORM ELEMENTS
+   ============================================================ */
+.page-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--black);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  font-size: 15px;
+  color: var(--mid-gray);
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.field-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--mid-gray);
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+}
+
+.field-input {
+  width: 100%;
+  height: 52px;
+  background: var(--input-bg);
+  border: none;
+  border-radius: 30px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-family: var(--font);
+  color: var(--dark-gray);
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.field-input:focus {
+  box-shadow: 0 0 0 2.5px var(--red);
+}
+
+.field-input::placeholder {
+  color: #999;
+  letter-spacing: 3px;
+}
+
+/* Buttons */
+.btn-primary {
+  display: block;
+  width: 100%;
+  height: 54px;
+  background: var(--red);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 800;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.18s, transform 0.1s;
+  letter-spacing: 0.3px;
+}
+.btn-primary:active { transform: scale(0.97); background: #e01c1c; }
+
+#btn-register-submit {
+  height: 200px;
+  padding : 10px 32px;
+  font-size: 20px;
+}
+
+.btn-outline {
+  display: block;
+  width: 100%;
+  height: 54px;
+  background: var(--white);
+  color: var(--red);
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 800;
+  border: 2px solid var(--red);
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.18s, transform 0.1s;
+}
+.btn-outline:active { transform: scale(0.97); background: #fff5f5; }
+
+/* Text links */
+.text-link {
+  display: block;
+  text-align: center;
+  color: var(--mid-gray);
+  font-size: 14px;
+  text-decoration: underline;
+  margin-top: 14px;
+  cursor: pointer;
+}
+.text-link.underline { text-decoration: underline; color: var(--black); font-size: 14px; margin-bottom: 16px; }
+
+/* ============================================================
+   PAGE 1B — FORGOT PASSWORD
+   ============================================================ */
+#page-forgot .inner-body {
+  align-items: center;
+}
+
+/* ============================================================
+   PAGE 2 — REGISTRATION
+   ============================================================ */
+.inner-body {
+  flex: 1;
+  padding: 20px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.inner-body::-webkit-scrollbar { display: none; }
+
+/* ============================================================
+   PAGE 3 — DASHBOARD
+   ============================================================ */
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pushes items to the far edges */
+  padding: 0 16px;
+  height: 60px; /* Adjust based on your design */
+  background: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-spacer, 
+.header-action-btn {
+  width: 40px; /* Give them both a fixed width */
+  display: flex;
+  justify-content: center;
+  background: none;
+  border: none;
+}
+
+.header-logo {
+  display: flex;
+  gap: 4px;
+  font-weight: 800;
+  /* Ensure the logo itself doesn't shrink */
+  flex-shrink: 0; 
+}
+
+
+.header-action-btn {
+  font-size: 20px;
+  color: var(--black);
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none
+  transition: transform 0.1s ease;
+}
+
+.header-action-btn i{
+  color:  var(--red);
+  font-size: 25px;
+}
+
+.header-action-btn:active {
+  transform: scale(0.9);
+}
+
+.header-action-btn:active i {
+  color: var(--red);
+  opacity: 0.8;
+}
+
+
+
+.dash-body {
+  flex: 1;
+  padding: 24px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+}
+
+.dash-body::-webkit-scrollbar { 
+  display: none; 
+}
+
+/* Weather Banner */
+.weather-banner{
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  margin-top: -50px;
+  border-radius: 18px;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+
+/* ── SOS Action Area ────────────────────────────────────────── */
+/* SOS circle button */
+.sos-circle-outer {
+  width: 250px;
+  height: 250px;
+  min-width: 250px;
+  min-height: 250px;
+  border-radius: 50%;
+  background: var(--red);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 32px rgba(255,35,35,0.5);
+  position: relative;
+  z-index: 10;
+  transition: transform 0.12s;
+  animation: sosPulse 2.4s ease-in-out infinite;
+  margin: 20px auto;
+  margin-top: 20px;
+  flex-shrink: 0;
+}
+.sos-circle-outer:active { transform: scale(0.95); }
+
+@keyframes sosPulse {
+  0%, 100% { box-shadow: 0 6px 32px rgba(255,35,35,0.5); }
+  50%       { box-shadow: 0 6px 48px rgba(255,35,35,0.8), 0 0 0 12px rgba(255,35,35,0.2); }
+}
+
+.sos-circle-inner {
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tap-icon {
+  display: block;
+  font-size: 80px;
+  color: var(--red);
+  transition: opacity 0.15s, color 0.15s;
+}
+
+.sos-circle-outer:hover .tap-icon {
+  opacity: 0.8;
+  color: #ff5555;
+}
+
+.sos-circle-outer:active .tap-icon {
+  opacity: 0.6;
+  color: #e01c1c;
+}
+
+/* SOS Button Label */
+.sos-button-label {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--black);
+  letter-spacing: 0.5px;
+  margin-top: 12px;
+  margin-bottom: 20px;
+  white-space: nowrap;
+}
+
+/* ── Featured Carousel ───────────────────────────────────────── */
+.featured-carousel-wrap {
+  flex: 10 0 auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.featured-carousel {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-radius: 18px;
+  background: var(--light-gray);
+  height: 220px;
+  display: flex;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.carousel-slide {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light-gray);
+  cUrsor: pointer;
+  transition: transform 0.12s;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: none;
+  padding: 0;
+}
+
+
+.carousel-slide:active,
+.carousel-slide-btn:active {
+  transform: scale(0.98);
+}
+
+.carousel-slide-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 1;
+  object-position: center;
+  border-radius: 18px;
+}
+
+.carousel-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: white;
+  opacity: 0.85;
+  z-index: 20;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+/* Carousel dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--light-gray);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.carousel-dot.active {
+  background: var(--red);
+  transform: scale(1.3);
+}
+
+.carousel-dot:active {
+  transform: scale(1.1);
+}
+
+/* ── Resource Grid ──────────────────────────────────────────── */
+.resource-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+  margin-top: 20px;
+}
+
+.resource-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 12px;
+  background: var(--white);
+  border: 2.5px solid var(--light-gray);
+  border-radius: 18px;
+  padding-bottom: 0;
+  cursor: pointer;
+  transition: transform 0.12s, border-color 0.15s;
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+
+.resource-tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+
+.resource-tile:active {
+  transform: scale(0.95);
+}
+
+.resource-tile:active::before {
+  background: rgba(0, 0, 0, 0.05);
+  opacity: 1;
+}
+
+.resource-tile-img-wrap {
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  background: var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resource-tile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.resource-tile-title {
+  text-align: left;
+  margin: 0;
+  padding: 12px 12px 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.resource-tile-description {
+  text-align: left;
+  margin: 0;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.resource-tile-subtitle {
+  text-align: left;
+  margin: 0;
+  padding: 0 12px 12px 12px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--black);
+}
+
+/* ============================================================
+    GLOBAL NAVBAR
+    ============================================================ */
+.global-navbar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: var(--navbar-h);
+  background: var(--white);
+  border-top: 1.5px solid #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+  z-index: 100;
+}
+.nav-btn {
+  flex: 1;
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  gap: 3px; padding: 8px 4px;
+  color: #888888;
+  transition: color 0.15s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.nav-icon { 
+  font-size: 20px; 
+}
+
+.nav-label { 
+  font-size: 10px; 
+  font-weight: 700; 
+}
+
+.nav-btn.nav-active { 
+  color: var(--red); 
+}
+
+.nav-btn:hover { 
+  color: var(--red); 
+}
+
+
+/* ============================================================
+    GO-BAG CHECKLIST
+    ============================================================ */
+/* 1. The Banner: Bigger and wider under the header */
+.checklist-image {
+  width: 105%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 18px;
+  margin-bottom: -20px;
+  margin-top: -40px;
+  margin-left: -5px;
+}
+
+/* 2. Progress Section Styling */
+.progress-section {
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.progress-title h3 { margin: 0; font-size: 1.2rem; font-weight: 800; color: #1a1a1a; }
+.progress-title p { margin: 0; font-size: 0.85rem; color: #aaa; }
+
+.badge-person {
+  background: #e0e0e0;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  color: #333;
+}
+
+/* Status label */
+.gobag-status-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+.gobag-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ccc;
+  transition: background 0.3s;
+}
+.gobag-status-label span:last-child {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #888;
+  transition: color 0.3s;
+}
+.gobag-status-label.status-in-progress .gobag-status-dot { 
+  background: #ffb347; 
+}
+
+
+.gobag-status-label.status-in-progress span:last-child { 
+  color: #c47900; 
+}
+.gob
+ag-status-label.status-almost .gobag-status-dot { 
+  background: #2ecc71; 
+}
+
+.gobag-status-label.status-almost span:last-child { 
+  color: #1a8a4a; 
+}
+
+.gobag-status-label.status-ready .gobag-status-dot { 
+  background: var(--red); 
+  animation: statusPulse 1s ease-in-out infinite; 
+}
+
+.gobag-status-label.status-ready span:last-child { 
+  color: var(--red); 
+  font-weight: 900; 
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.progress-bar-container {
+  position: relative;
+  height: 8px;
+  background: #eee;
+  border-radius: 10px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--red) 0%, #ff6b6b 100%);
+  border-radius: 10px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gobag-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+.gobag-items-count {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #aaa;
+}
+.progress-percentage {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: var(--red);
+}
+
+/* 3. Checklist Item Styling */
+.checklist-group { margin-top: 25px; }
+
+.group-title {
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 18px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+/* Checked state: dim and strikethrough */
+.check-item.item-checked {
+  opacity: 0.45;
+}
+.check-item.item-checked .item-text strong {
+  text-decoration: line-through;
+}
+
+.check-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  margin-top: 2px;
+  accent-color: var(--red);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.check-item input[type="checkbox"]:checked {
+  animation: checkPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes checkPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+.item-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #111;
+  line-height: 1.2;
+  transition: color 0.3s;
+}
+
+.item-text span {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* 4. Milestone Overlay */
+.gobag-milestone-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.gobag-milestone-overlay.active { display: flex; }
+
+.gobag-milestone-card {
+  background: var(--white);
+  border-radius: 24px;
+  padding: 32px 28px;
+  text-align: center;
+  width: 80%;
+  max-width: 300px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+  animation: milestonePop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes milestonePop {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.gobag-milestone-icon {
+  font-size: 52px;
+  margin-bottom: 10px;
+  display: block;
+}
+.gobag-milestone-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+.gobag-milestone-msg {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--mid-gray);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.gobag-milestone-btn {
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: transform 0.1s;
+}
+.gobag-milestone-btn:active { transform: scale(0.96); }
+
+
+/* ============================================================
+   PAGE — MESSAGE
+   ============================================================ */
+.msg-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 60px;
+  background-color: var(--white);
+  border-bottom: 1.5px solid var(--light-gray);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.msg-header-contact { 
+  flex: 1; 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+}
+
+.msg-header-avatar {
+  width: 36px; 
+  height: 36px; 
+  border-radius: 50%;
+  background: var(--red); 
+  color: white; 
+  font-weight: 900; 
+  font-size: 16px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+
+.msg-header-name { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: var(--black); 
+}
+
+.msg-header-actions { 
+  display: flex; 
+  gap: 4px; }
+.msg-header-icon-btn {
+  width: 34px; 
+  height: 34px; 
+  border-radius: 50%; 
+  background: none; 
+  border: none;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  color: var(--mid-gray); 
+  font-size: 16px; 
+  cursor: pointer;
+}
+
+.msg-dropdown {
+  position: absolute; 
+  top: var(--header-h); 
+  right: 14px; z-index: 300;
+  background: var(--white); 
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.15); 
+  border: 1.5px solid var(--light-gray);
+  min-width: 200px; 
+  overflow: hidden;
+}
+
+.msg-dropdown-item {
+  padding: 13px 16px; 
+  font-size: 13.5px; 
+  font-weight: 700;
+  color: var(--black); 
+  cursor: pointer; 
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.msg-dropdown-item:last-child { 
+  border-bottom: none; 
+}
+
+.msg-dropdown-item:hover { 
+  background: var(--background); 
+}
+.msg-dropdown-danger { 
+  color: var(--red); 
+}
+
+.msg-body {
+  flex: 1; 
+  overflow-y: auto; 
+  min-height: 0;
+  padding: 16px;
+  display: flex; 
+  flex-direction: column; 
+  gap: 10px;
+}
+
+.msg-empty-state {
+  flex: 1; 
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  gap: 10px;
+}
+
+.msg-empty-avatar {
+  width: 72px; 
+  height: 72px; 
+  border-radius: 50%;
+  background: var(--light-gray); 
+  color: var(--mid-gray);
+  font-size: 32px; 
+  font-weight: 900;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  opacity: 0.4;
+}
+
+.msg-empty-text { 
+  font-size: 15px; 
+  font-weight: 700; color: var(--mid-gray); 
+}
+
+.msg-quick-chats { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 6px; 
+}
+
+.msg-quick-btn {
+  background: var(--background); 
+  border: 1.5px solid var(--light-gray);
+  border-radius: 20px; 
+  padding: 10px 16px;
+  font-size: 13px; 
+  font-weight: 700; 
+  color: var(--black);
+  text-align: left; 
+  transition: background 0.15s; 
+  cursor: pointer; 
+  font-family: var(--font);
+}
+
+.msg-quick-btn:hover { 
+  background: var(--light-gray); 
+}
+
+.msg-quick-urgent { 
+  border-color: rgba(255,35,35,0.3); 
+  background: rgba(255,35,35,0.05); 
+  color: var(--red); 
+}
+
+.msg-chat-list { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 8px; 
+}
+
+.msg-bubble-wrap { 
+  display: flex; 
+}
+
+.msg-bubble-wrap.outgoing { 
+  justify-content: flex-end; 
+}
+
+.msg-bubble {
+  max-width: 75%; 
+  padding: 10px 14px;
+  border-radius: 18px; 
+  font-size: 13.5px; 
+  font-weight: 600; 
+  line-height: 1.45;
+}
+
+.msg-bubble-wrap.incoming .msg-bubble { 
+  background: var(--white); 
+  border: 1.5px solid var(--light-gray); 
+  color: var(--black); 
+  border-bottom-left-radius: 4px; 
+}
+
+.msg-bubble-wrap.outgoing .msg-bubble {
+  background: var(--red); 
+  color: white; 
+  border-bottom-right-radius: 4px; 
+}
+.msg-bubble-wrap.outgoing .msg-bubble.urgent { 
+  background: #8B0000; 
+}
+
+.msg-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--white);
+  border-top: 1.5px solid var(--light-gray);
+  flex-shrink: 0;
+}
+
+.msg-footer-utils { 
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.msg-util-btn {
+  width: 34px; 
+  height: 34px; 
+  border-radius: 50%; 
+  background: none; 
+  border: none;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  color: var(--mid-gray); 
+  font-size: 16px; 
+  cursor: pointer;
+}
+
+.msg-input-wrap {
+  flex: 1; 
+  display: flex; 
+  align-items: center; 
+  gap: 6px;
+  background: var(--background); 
+  border: 1.5px solid var(--light-gray);
+  border-radius: 24px; 
+  padding: 0 12px; 
+  height: 40px;
+  min-width: 0;
+}
+
+.msg-input { 
+  flex: 1; 
+  min-width: 0;
+  font-size: 13.5px; 
+  font-weight: 600; 
+  color: var(--black); 
+  border: none; 
+  background: transparent; 
+  outline: none; 
+  font-family: var(--font); 
+  height:100%;
+}
+
+.msg-emoji-btn { 
+  color: var(--mid-gray); 
+  font-size: 18px; 
+  background: none; 
+  border: none; 
+  padding: 0;
+  cursor: pointer; 
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.msg-send-btn {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%;
+  background: var(--red); 
+  color: white; 
+  font-size: 16px; 
+  border: none; 
+  cursor: pointer;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(255,35,35,0.35);
+}
+
+#page-message{
+  overflow: hidden;
+}
+/* ============================================================
+   RECENT MESSAGES UI
+   ============================================================ */
+
+.btn-back {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--dark-gray);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 32px; /* Fixed width to match spacer */
+  padding: 0;
+}
+
+.msg-header-title {
+  flex: 1;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  margin: 0; /* Removes default h1 margins */
+}
+
+.recent-msg-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.recent-msg-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  background: var(--white);
+  border-radius: 16px;
+  border: 1.5px solid var(--light-gray);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.recent-msg-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.recent-msg-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.recent-msg-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.recent-msg-name {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--black);
+}
+
+.recent-msg-time {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--mid-gray);
+}
+
+.recent-msg-preview {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--dark-gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================
+    PAGE 7 — EVACUATION CENTERS
+    ============================================================ */
+
+/* Search bar */
+.search-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: 2px solid var(--black);
+  border-radius: 30px;
+  padding: 10px 18px;
+  margin-bottom: 20px;
+}
+
+.search-icon { font-size: 18px; color: var(--mid-gray); }
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-family: var(--font);
+  color: var(--mid-gray);
+  outline: none;
+}
+
+/* Evac cards */
+.evac-card {
+  border: 2.5px solid var(--card-border);
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+  background: var(--white);
+  transition: transform 0.12s;
+  cursor: default;
+}
+
+.evac-card-top { margin-bottom: 14px; }
+
+.evac-name {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--black);
+  margin-bottom: 2px;
+}
+
+.evac-desc {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.evac-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.evac-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-dot.green  { 
+  background: var(--green); 
+}
+
+.status-dot.orange { 
+  background: var(--orange); 
+}
+
+.status-dot.red    { 
+  background: var(--red); 
+}
+
+/* Checkmarks inside status dots */
+.status-dot::after {
+  content: '✓';
+  font-size: 13px;
+  font-weight: 900;
+  color: white;
+}
+
+.status-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.evac-capacity {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+/* ============================================================
+   PAGE 8/9 — SAFE ROUTES
+   ============================================================ */
+.safe-routes-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.safe-routes-body::-webkit-scrollbar { display: none; }
+
+/* Map placeholder - Leaflet container */
+.map-placeholder {
+  width: 100%;
+  height: 400px;
+  background: #dce8ef;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Route cards section */
+.route-cards-wrap {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.route-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 14px;
+  padding: 14px 18px;
+  border: 2px solid transparent;
+}
+
+.safe-route {
+  border-color: var(--green);
+}
+
+.flooded-route {
+  border-color: var(--red);
+}
+
+.route-card-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.route-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.route-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.route-status {
+  font-size: 16px;
+  font-weight: 800;
+}
+.safe-label { color: var(--green); }
+.flooded-label { color: var(--red); }
+
+/* Destination card */
+.destination-card {
+  border: 2px solid var(--light-gray);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.destination-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dest-pin-wrap { flex-shrink: 0; }
+
+.dest-text { flex: 1; min-width: 0; }
+
+.dest-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dest-address {
+  font-size: 11px;
+  color: var(--mid-gray);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dest-chevron {
+  font-size: 14px;
+  color: var(--mid-gray);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.dest-chevron.open { transform: rotate(180deg); }
+
+.destination-dropdown {
+  border-top: 1px solid var(--light-gray);
+}
+
+.dest-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark-gray);
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+.dest-option:last-child { border-bottom: none; }
+.dest-option:active { background: #f8f8f8; }
+
+/* Travel info */
+.travel-info-card {
+  border: 2px solid var(--light-gray);
+  border-radius: 14px;
+  background: #f9f9f9;
+  overflow: hidden;
+}
+
+.travel-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--light-gray);
+}
+.travel-option:last-child { border-bottom: none; }
+
+.travel-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.travel-mode {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 2px;
+}
+
+.travel-sub {
+  font-size: 12px;
+  color: var(--mid-gray);
+  font-weight: 600;
+}
+
+/* ============================================================
+   PAGE 10 — EMERGENCY UPDATES
+   ============================================================ */
+.alert-card {
+  border: 2.5px solid var(--card-border);
+  border-radius: 18px;
+  padding: 14px 18px;
+  margin-bottom: 30px;
+  background: var(--white);
+}
+
+.alert-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.alert-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alert-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+  display: block;
+}
+
+.alert-title-text {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--black);
+}
+
+.alert-time {
+  font-size: 12px;
+  color: var(--mid-gray);
+  font-weight: 600;
+}
+
+.alert-body {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.55;
+  text-align: justify;
+}
+
+/* ============================================================
+   PAGE — CONTACTS
+   ============================================================ */
+.contacts-body {
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.contacts-section-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #888888;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.recent-calls-carousel {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-left: 0;
+  padding-right: 10px;
+  margin-bottom: 0px;
+  flex-shrink: 0;
+}
+
+.recent-calls-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.recent-call-card {
+  flex-shrink: 0;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding-left: 0px;
+  margin-left: 0;
+}
+
+.recent-call-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.recent-call-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--black);
+  text-align: center;
+  word-break: break-word;
+}
+
+.recent-call-time {
+  font-size: 10px;
+  color: #888888;
+  font-weight: 600;
+  margin-bottom: -10px;
+}
+
+.contact-list {
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow-y: auto;
+}
+.contact-alpha-divider {
+  font-size: 12px; 
+  font-weight: 900; 
+  color: var(--red);
+  padding: 6px 0 2px;
+  letter-spacing: 0.5px;
+}
+
+.contact-row {
+  background: var(--white); 
+  border-radius: 8px;
+  border: 1.5px solid #e8e8e8; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  padding: 10px 12px;
+  display: flex; 
+  align-items: center; 
+  gap: 12px;
+  margin-bottom: 4px; 
+  cursor: pointer;
+}
+
+.contact-avatar {
+  width: 42px; 
+  height: 42px; 
+  border-radius: 50%;
+  color: white; 
+  font-size: 18px; 
+  font-weight: 900;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-info { 
+  flex: 1; 
+  min-width: 0; 
+}
+
+.contact-name { 
+  display: block; 
+  font-size: 14px; 
+  font-weight: 800; 
+  color: var(--black); 
+}
+
+.contact-rel  { 
+  display: block; 
+  font-size: 11px; 
+  color: #888888; 
+  font-weight: 600; 
+}
+
+.contact-actions { 
+  display: flex; 
+  gap: 6px; 
+  flex-shrink: 0; 
+}
+
+.contact-action-btn {
+  width: 34px; 
+  height: 34px; 
+  border-radius: 50%;
+  display: flex;
+  align-items: 
+  center; 
+  justify-content: center;
+  font-size: 14px; 
+  border: none; 
+  cursor: pointer;
+}
+
+.contact-call { 
+  background: rgba(39,174,96,0.12); 
+  color: #27ae60; 
+}
+
+.contact-sms  { 
+  background: rgba(41,128,185,0.12); 
+  color: #2980b9; 
+}
+
+/* ============================================================
+    PAGE — ACCOUNT
+    ============================================================ */
+.account-body { 
+  flex: 1; 
+  overflow-y: auto; 
+  display: flex; 
+  flex-direction: column; }
+.account-profile-header {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  padding: 24px 20px 20px;
+  text-align: center;
+}
+.account-avatar-wrap { 
+  position: relative; 
+  margin-bottom: 12px; 
+}
+.account-profile-img {
+  width: 100px; 
+  height: 100px; 
+  border-radius: 50%; 
+  object-fit: cover;
+  display: block;
+  object-position: top;
+}
+.account-avatar-fallback {
+  width: 90px; 
+  height: 90px; 
+  border-radius: 50%;
+  background: var(--red); 
+  color: white;
+  font-size: 36px; 
+  font-weight: 900;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  border: 3px solid var(--red);
+}
+img[src="userprofile.png"]:not([src]) + .account-avatar-fallback,
+img[src="userprofile.png"] + .account-avatar-fallback { 
+  display: flex; }
+
+
+
+.account-edit-avatar-btn {
+  position: absolute; 
+  bottom: 2px; 
+  right: 2px;
+  width: 28px; 
+  height: 28px; 
+  border-radius: 50%;
+  background: var(--red); 
+  color: white; 
+  font-size: 12px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  border: none; cursor: pointer;
+}
+.account-welcome { 
+  font-size: 13px; 
+  color: #888888; 
+  font-weight: 600; 
+}
+
+.account-name { 
+  font-size: 18px; 
+  font-weight: 900; 
+  color: var(--black); 
+  margin: 2px 0; 
+}
+
+.account-email { 
+  font-size: 12px; 
+  color: #888888; 
+  font-weight: 600; 
+}
+
+.account-menu { 
+  padding: 8px 20px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 2px; 
+}
+
+.account-menu-item {
+  display: flex; 
+  align-items: center; 
+  gap: 14px;
+  padding: 15px 14px; 
+  border-radius: 8px;
+  font-size: 14px; 
+  font-weight: 700; 
+  color: var(--black);
+  cursor: default;
+  transition: background 0.15s;
+}
+
+.account-menu-item:hover { 
+  background: #f5f5f5; 
+}
+
+.account-menu-icon { 
+  font-size: 18px; 
+  color: #888888; 
+  width: 20px; 
+  text-align: center; 
+  flex-shrink: 0; 
+}
+
+.account-menu-chevron { 
+  margin-left: auto; 
+  font-size: 12px; 
+  color: #888888; 
+}
+
+.account-logout-wrap { 
+  padding: 8px 20px 24px; 
+}
+
+.btn-logout {
+  width: 100%; 
+  height: 50px;
+  border-radius: 12px;
+  border: 2px solid var(--red);
+  color: var(--red);
+  font-size: 15px; 
+  font-weight: 800;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 8px;
+  transition: background 0.15s;
+  background: none;
+  cursor: pointer;
+}
+
+.btn-logout:hover { 
+  background: #ffe8e8; 
+}
+
+/* ============================================================
+   PAGE 8 — TYPHOON SAFETY TIPS
+   ============================================================ */
+
+.tips-banner-image {
+  width: 105%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 18px;
+  margin-bottom: -20px;
+  margin-top: -40px;
+  margin-left: -5px;
+}
+
+.typhoon-tips-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.tips-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--black);
+  text-align: left;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.tips-description {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark-gray);
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.tips-section {
+  margin-bottom: 20px;
+}
+
+.tips-section-title {
+  font-size: 18px;
+  font-weight: 1000;
+  color: var(--black);
+  text-align: left;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+.tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tips-list li {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  text-align: left;
+  line-height: 1.5;
+  padding-left: 24px;
+  position: relative;
+}
+
+.tips-list li::before {
+  content: '•';
+  position: absolute;
+  left: 8px;
+  color: var(--black);
+  font-weight: 900;
+  font-size: 16px;
+}
+
+.separate-line {
+  height: 1px;
+  background: #e8e8e8;
+  margin: 20px 0;
+}
+
+/* ============================================================
+   PAGE 9 — FIRST AID & SURVIVAL GUIDE
+   ============================================================ */
+
+.first-aid-banner-image {
+  width: 105%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 18px;
+  margin-bottom: -10px;
+  margin-top: -40px;
+  margin-left: -5px;
+}
+
+.first-aid-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.first-aid-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--black);
+  text-align: left;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.first-aid-description {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--black);
+  line-height: 1.6;
+  text-align: left;
+  margin-bottom: 24px;
+  margin-top: 0;
+}
+
+.first-aid-section {
+  margin-bottom: 20px;
+}
+
+.first-aid-section-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  text-align: left;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+
+.first-aid-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.first-aid-list li {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  text-align: left;
+  line-height: 1.5;
+  padding-left: 24px;
+  position: relative;
+}
+
+.first-aid-list li::before {
+  content: '•';
+  position: absolute;
+  left: 8px;
+  color: var(--black);
+  font-weight: 900;
+  font-size: 16px;
+}
+
+/* ============================================================
+   ADD CONTACT BUTTON & MODAL
+   ============================================================ */
+
+/* Floating Action Button */
+.btn-add-contact {
+  position: absolute;
+  bottom: 90px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--red);
+  color: white;
+  border: none;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 35, 35, 0.4);
+  transition: transform 0.15s, box-shadow 0.15s;
+  z-index: 99;
+}
+
+.btn-add-contact:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(255, 35, 35, 0.5);
+}
+
+.btn-add-contact:active {
+  transform: scale(0.95);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+/* Modal Container */
+.modal-container {
+  position: relative;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 24px;
+  width: 85%;
+  max-width: 340px;
+  max-height: 70vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--dark-gray);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+  padding: 0;
+  margin-top: 12px;
+}
+
+.modal-close-btn:hover {
+  color: var(--black);
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--black);
+  margin-bottom: 24px;
+  margin-top: 0;
+  padding-right: 32px;
+}
+
+.add-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.btn-save-contact {
+  margin-top: 12px;
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+/* Slide feedback for buttons */
+button { touch-action: manipulation; }
+
+/* Scrollable inner-body */
+#page-register .inner-body,
+#page-forgot .inner-body {
+  overflow-y: auto;
+}
